@@ -8,6 +8,7 @@ void main() async {
   await Firebase.initializeApp();
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       home:  LoginScreen(),
       theme: ThemeData(brightness: Brightness.dark)
       // home: UiTaskScreen(),

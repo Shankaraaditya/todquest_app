@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:todquest_active_user_app_flutter/model/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:todquest_active_user_app_flutter/screens/UI_screen.dart';
 import 'package:todquest_active_user_app_flutter/screens/users.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -83,110 +85,114 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Login Screen"),
-        backgroundColor: Colors.deepPurple,
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title:  Text("Login Screen" ,style: GoogleFonts.poppins( fontSize: 30 ,fontWeight: FontWeight.bold),),
       ),
-      body: Container(
-        // height: MediaQuery.of(context).size.height,
-        // width: MediaQuery.of(context).size.width,
-        // decoration: const BoxDecoration(
-        //   gradient: LinearGradient(colors:[
-        //     Color.fromARGB(255, 81, 78, 78),
-        //     Color.fromARGB(255, 194, 133, 227),
-        //   ] ),
-        // ),
-        child: Form(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: _nameController,
-                        decoration: const InputDecoration(
-                          label: Text("Name"),
-                        ),
+      body: Form(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center ,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: _nameController,
+                      decoration: const InputDecoration(
+                        label: Text("Name"),
                       ),
                     ),
-                    const SizedBox(
-                      width: 50,
-                    ),
-                    Expanded(
-                      child: DropdownButtonFormField(
-                        items: [
-                          for (final category in ComeFrom.values)
-                            DropdownMenuItem(
-                              value: category.name,
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 16,
-                                    height: 16,
-                                    color: Colors.pink,
-                                  ),
-                                  const SizedBox(
-                                    width: 4,
-                                  ),
-                                  Text(category.name)
-                                ],
-                              ),
-                            )
-                        ],
-                        onChanged: (value) {
-                          _selected = value!;
-                          print(_selected);
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                TextFormField(
-                  controller: _emailController,
-                  decoration: const InputDecoration(
-                    label: Text("Email"),
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                TextFormField(
-                  controller: _passController,
-                  decoration: const InputDecoration(
-                    label: Text("Password"),
+                  const SizedBox(
+                    width: 50,
                   ),
+                  Expanded(
+                    child: DropdownButtonFormField(
+                      items: [
+                        for (final category in ComeFrom.values)
+                          DropdownMenuItem(
+                            value: category.name,
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 16,
+                                  height: 16,
+                                  color: Colors.pink,
+                                ),
+                                const SizedBox(
+                                  width: 4,
+                                ),
+                                Text(category.name)
+                              ],
+                            ),
+                          )
+                      ],
+                      onChanged: (value) {
+                        _selected = value!;
+                        print(_selected);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              TextFormField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  label: Text("Email"),
                 ),
-                const SizedBox(
-                  height: 16,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              TextFormField(
+                controller: _passController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  label: Text("Password"),
                 ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              CupertinoButton(
+                onPressed: () {
+                  signUp(_emailController.text, _passController.text);
+                },
+                child: const Text("Login"),
+              ),
+              
+              CupertinoButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (ctx) => const ActiveUsers(),
+                    ),
+                  );
+                },
+                child: const Text("Active Users"),
+              ),
+
                 CupertinoButton(
-                  onPressed: () {
-                    signUp(_emailController.text, _passController.text);
-                  },
-                  child: const Text("Login"),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                CupertinoButton(
-                  onPressed: () {
-                    // getUserDetails(activeUsers);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (ctx) => const ActiveUsers(),
-                      ),
-                    );
-                  },
-                  child: const Text("Active Users"),
-                ),
-              ],
-            ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (ctx) => const UiTaskScreen(),
+                    ),
+                  );
+                },
+                child: const Text("UI Task"),
+              ),
+            ],
           ),
         ),
       ),

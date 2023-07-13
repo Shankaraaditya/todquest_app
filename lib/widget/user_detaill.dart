@@ -17,10 +17,20 @@ class AboutUser extends StatelessWidget {
   Widget build(BuildContext context) {
     Icon from = Icon(Icons.man_2);
     if (comeFrom == 'Facebook') {
-      from = const Icon(Icons.facebook ,color: Colors.blue,);
-    }
-    else if(comeFrom == 'Google'){
-      from = const Icon(Icons.g_mobiledata , color: Colors.red,);
+      from = const Icon(
+        Icons.facebook,
+        size: 30,
+        color: Colors.blue,
+      );
+    } else if (comeFrom == 'Google') {
+      from = const Icon(
+        Icons.g_mobiledata,
+        size: 60,
+        color: Colors.red,
+      );
+    } else if (comeFrom == 'Instagram') {
+      from = const Icon(Icons.camera_alt_outlined , color: Color.fromARGB(255, 243, 81, 81),);
+      
     }
 
     return Padding(
@@ -35,7 +45,7 @@ class AboutUser extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -47,7 +57,7 @@ class AboutUser extends StatelessWidget {
                   child: Icon(
                     Icons.person,
                     size: 40,
-                    color: Colors.deepPurple,
+                    color: Color.fromARGB(255, 255, 255, 255),
                   ),
                 ),
                 Text(
@@ -57,24 +67,19 @@ class AboutUser extends StatelessWidget {
                 const SizedBox(
                   width: 20,
                 ),
-                Text(
-                  comeFrom,
-                  style: GoogleFonts.poppins(fontSize: 12),
+                Column(
+                  children: [
+                    Text(
+                      comeFrom,
+                      style: GoogleFonts.poppins(fontSize: 12),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    from
+                  ],
                 )
               ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                   from,
-                  //  const SizedBox(
-                  //   height: 5,
-                  // ),
-            
-                ],
-              ),
             ),
             Text(
               email,

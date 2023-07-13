@@ -2,31 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todquest_active_user_app_flutter/constants/constants.dart';
 
-
 class UiTaskScreen extends StatelessWidget {
   const UiTaskScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children:[ 
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Colors.white,
-                Color.fromARGB(255, 193, 170, 240)
-                
-              ])
-            ),
-          ),
-          
-          
-          Positioned(
-            
-            child: Column(
+      body: Stack(children: [
+        Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [Colors.white, Color.fromARGB(255, 193, 170, 240)])),
+        ),
+        Positioned(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Stack(
@@ -42,8 +33,8 @@ class UiTaskScreen extends StatelessWidget {
                             width: Utilities.screenWidth * 0.05,
                           ),
                           Container(
-                            padding:
-                                EdgeInsets.only(left: Utilities.screenWidth * 0.1),
+                            padding: EdgeInsets.only(
+                                left: Utilities.screenWidth * 0.1),
                             width: Utilities.screenWidth * 0.8,
                             height: Utilities.screenHeight * 0.6,
                             decoration: const BoxDecoration(
@@ -64,40 +55,42 @@ class UiTaskScreen extends StatelessWidget {
                                   bottomRight: Radius.circular(25),
                                 )),
                             child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(
                                     height: Utilities.screenHeight * 0.13,
                                   ),
-                                   Text(
+                                  Text(
                                     "Breakfast",
-                                    style: GoogleFonts.lato(
+                                    style: GoogleFonts.poppins(
                                         color: Colors.white,
-                                        fontSize: 60,
+                                        fontSize: 50,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   const SizedBox(),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children:  [
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
                                       Text(
                                         "Bread,",
-                                        style: GoogleFonts.lato(
+                                        style: GoogleFonts.poppins(
                                           color: Colors.white,
                                           fontSize: 30,
                                         ),
                                       ),
                                       Text(
                                         "Peanut butter,",
-                                        style: GoogleFonts.lato(
+                                        style: GoogleFonts.poppins(
                                           color: Colors.white,
                                           fontSize: 30,
                                         ),
                                       ),
                                       Text(
                                         "Apple",
-                                        style: GoogleFonts.lato(
+                                        style: GoogleFonts.poppins(
                                           color: Colors.white,
                                           fontSize: 30,
                                         ),
@@ -107,9 +100,9 @@ class UiTaskScreen extends StatelessWidget {
                                   const SizedBox(),
                                   Row(
                                     children: [
-                                       Text(
+                                      Text(
                                         "525",
-                                        style: GoogleFonts.lato(
+                                        style: GoogleFonts.poppins(
                                             color: Colors.white,
                                             fontSize: 60,
                                             fontWeight: FontWeight.bold),
@@ -117,9 +110,9 @@ class UiTaskScreen extends StatelessWidget {
                                       SizedBox(
                                         width: Utilities.screenWidth * 0.05,
                                       ),
-                                       Text(
+                                      Text(
                                         "kcal",
-                                        style: GoogleFonts.lato(
+                                        style: GoogleFonts.poppins(
                                             color: Colors.white,
                                             fontSize: 30,
                                             fontWeight: FontWeight.bold),
@@ -137,16 +130,16 @@ class UiTaskScreen extends StatelessWidget {
                       CircleAvatar(
                         radius: Utilities.screenHeight * 0.15,
                         backgroundColor: Colors.white.withOpacity(0.2),
-                        child:
-                            const Image(image: AssetImage('assets/images/egg.png')),
+                        child: const Image(
+                            image: AssetImage('assets/images/egg.png')),
                       )
                     ],
                   ),
                 ],
               ),
             ],
-                  ),
-          )
+          ),
+        )
       ]),
     );
   }

@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:todquest_active_user_app_flutter/widget/user_detaill.dart';
 
 import '../model/user.dart';
@@ -99,8 +100,10 @@ class _ActiveUsers extends State<ActiveUsers> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Active Users"),
-        backgroundColor: Colors.deepPurple,
+        centerTitle: true,
+        title:  Text("Active Users" ,style: GoogleFonts.poppins( fontSize: 30 ,fontWeight: FontWeight.bold),),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       body: Column(
         children: [
@@ -109,7 +112,7 @@ class _ActiveUsers extends State<ActiveUsers> {
             child: TextField(
               controller: _searchController,
               decoration:
-                  const InputDecoration(label: Text("Enter Name or email Id")),
+               InputDecoration(label: Text("Search", style: GoogleFonts.poppins(),)),
               onChanged: (value) => _runFilter(
                 _searchController.text,
               ),
