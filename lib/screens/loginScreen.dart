@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todquest_active_user_app_flutter/model/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -50,105 +51,142 @@ class LoginScreen extends StatelessWidget {
     print("Details added");
   }
 
+  // ==============================================================================================================================================================================================================
+  Future<List<UserDetails>> fetchAllUserDetails() async {
+    List<UserDetails> userDetailsList = [];
+
+    try {
+      final QuerySnapshot querySnapshot =
+          await FirebaseFirestore.instance.collection('users').get();
+
+      final List<QueryDocumentSnapshot> documents = querySnapshot.docs;
+
+      for (final document in documents) {
+        final userDetails = UserDetails.fromSnapshot(document);
+        userDetailsList.add(userDetails);
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+
+    return userDetailsList;
+  }
+
+  void getUserDetails(List<UserDetails> s) async {
+    List<UserDetails> s = await fetchAllUserDetails();
+    print(s[0].comeFrom);
+  }
+
+  List<UserDetails> activeUsers = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Login Screen"),
+        backgroundColor: Colors.deepPurple,
       ),
-      body: Form(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: _nameController,
-                      decoration: const InputDecoration(
-                        label: Text("Name"),
+      body: Container(
+        // height: MediaQuery.of(context).size.height,
+        // width: MediaQuery.of(context).size.width,
+        // decoration: const BoxDecoration(
+        //   gradient: LinearGradient(colors:[
+        //     Color.fromARGB(255, 81, 78, 78),
+        //     Color.fromARGB(255, 194, 133, 227),
+        //   ] ),
+        // ),
+        child: Form(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: _nameController,
+                        decoration: const InputDecoration(
+                          label: Text("Name"),
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 50,
-                  ),
-                  Expanded(
-                    child: DropdownButtonFormField(
-                      items: [
-                        for (final category in ComeFrom.values)
-                          DropdownMenuItem(
-                            value: category.name,
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 16,
-                                  height: 16,
-                                  color: Colors.pink,
-                                ),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                Text(category.name)
-                              ],
-                            ),
-                          )
-                      ],
-                      onSaved: (value) {
-                        print("ON SAVED -->>> $value");
-                      },
-                      onChanged: (value) {
-                        _selected = value!;
-                        print(_selected);
-                      },
+                    const SizedBox(
+                      width: 50,
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              TextFormField(
-                controller: _emailController,
-                decoration: const InputDecoration(
-                  label: Text("Email"),
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              TextFormField(
-                controller: _passController,
-                decoration: const InputDecoration(
-                  label: Text("Password"),
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  signUp(_emailController.text, _passController.text);
-                },
-                child: const Text("Login"),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (ctx) => const ActiveUsers(),
+                    Expanded(
+                      child: DropdownButtonFormField(
+                        items: [
+                          for (final category in ComeFrom.values)
+                            DropdownMenuItem(
+                              value: category.name,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 16,
+                                    height: 16,
+                                    color: Colors.pink,
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(category.name)
+                                ],
+                              ),
+                            )
+                        ],
+                        onChanged: (value) {
+                          _selected = value!;
+                          print(_selected);
+                        },
+                      ),
                     ),
-                  );
-                },
-                child: const Text("Login"),
-              ),
-            ],
+                  ],
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                TextFormField(
+                  controller: _emailController,
+                  decoration: const InputDecoration(
+                    label: Text("Email"),
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                TextFormField(
+                  controller: _passController,
+                  decoration: const InputDecoration(
+                    label: Text("Password"),
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                CupertinoButton(
+                  onPressed: () {
+                    signUp(_emailController.text, _passController.text);
+                  },
+                  child: const Text("Login"),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                CupertinoButton(
+                  onPressed: () {
+                    // getUserDetails(activeUsers);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (ctx) => const ActiveUsers(),
+                      ),
+                    );
+                  },
+                  child: const Text("Active Users"),
+                ),
+              ],
+            ),
           ),
         ),
       ),
