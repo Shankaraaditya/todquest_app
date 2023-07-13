@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "604246677456",
+    "project_id": "todquest-3f685",
+    "storage_bucket": "todquest-3f685.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604246677456:android:98cc74cfadf2a21e740bd5",
+        "android_client_info": {
+          "package_name": "com.example.todquest_active_user_app_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604246677456-qappmh32c8r9psvnj1aeb2flfoi5e63v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXnNLImAE6E554pVfXJPriFCcvvJ-R6eA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604246677456-qappmh32c8r9psvnj1aeb2flfoi5e63v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
